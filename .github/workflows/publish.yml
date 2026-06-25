@@ -49,7 +49,11 @@ jobs:
       - name: Bump version, tag, and push
         run: pnpm bumpp --yes --release ${{ inputs.release }}
 
+      # pnpm shells out to whatever npm is on PATH for `pnpm publish`, which is
+      # unreliable with OIDC trusted publishing (https://github.com/pnpm/pnpm/issues/9812).
+      # Publish with npm directly instead; it requires npm >= 11.5.1 for trusted publishing.
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@^11.5.1
+
       - name: Publish to npm
-        run: pnpm publish --access public --provenance --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
