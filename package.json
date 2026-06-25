@@ -1,7 +1,7 @@
 {
 	"name": "clean-links",
 	"type": "module",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "kevin8181",
 	"license": "AGPL-3.0-only",
 	"homepage": "https://github.com/kevin8181/linkCleaner#readme",
